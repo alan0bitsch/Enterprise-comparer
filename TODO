@@ -1,0 +1,10 @@
+- Decidir si el programa va a pullear de un sitio o de datos estáticos y programarlo acorde a lo decidido.
+- Análisis y almacenamiento de los datos de los csv.
+- Gráfico de valor de las acciones de 2 empresas, intervalo definido por el usuario. Marcar puntos de intersección.
+- Comparación de crecimiento entre 2 empresas en el mes pasado, el anterior a éste y los últimos 12 meses.
+    - Añadir input del usuario para cambiar el periodo de tiempo.
+- Con una fecha de inicio y de fin definida por el usuario, el programa analiza qué empresa tiene mayor coeficiente de correlación lineal.
+- Mostrar la pendiente obtenida al aproximar el precio de cada empresa mediante una ecuación lineal.
+- Output de gráficos en formato .PNG con nombre a definir por input.
+- Crearlo como una aplicación de consola que se ejecute en loop hasta que el usuario introduzca el comando de salida.
+- Añadir un comando de ayuda a dicho loop
