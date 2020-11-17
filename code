@@ -21,8 +21,8 @@ wgetAMZN("https://raw.githubusercontent.com/IEEESBITBA/Curso-Python/master/Clase
 
 
 
-intervalo_inicio = int(input('Definir inicio: '))
-intervalo_fin = int(input('Definir fin: '))
+intervalo_inicio = str(input('Definir inicio (formato yyyy-mm-dd): '))
+intervalo_fin = str(input('Definir fin (formato yyyy-mm-dd): '))
 
 
 
@@ -81,18 +81,24 @@ try:
 except TypeError:
     print('No hay intersecciones.')
     xinter, yinter = [], []
-plt.plot(xinter, yinter, 'bo', label='Interseccion')
+
 
 
 
 #===============================================================================
 
+
+
+fechas_analisis = dates[intervalo_inicio::intervalo_fin]
+
+if yinter in fechas_analisis:
+    plt.plot(xinter, yinter, 'bo', label='Interseccion')
+    
+else:
+    print('No existe intersección entre los gráficos en el intervalo de fechas seleccionadas')
+    
+
 r = []
-
-np.
-
-if yinter 
-
 
 plt.ylabel('Dólares')
 plt.xlabel('Fecha')
@@ -100,3 +106,7 @@ plt.xticks(r)
 plt.legend(loc='upper left')
 plt.savefig('Acciones GGL Vs AMZN.png')
 plt.show()
+
+
+
+
