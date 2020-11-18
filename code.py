@@ -21,8 +21,7 @@ wgetAMZN("https://raw.githubusercontent.com/IEEESBITBA/Curso-Python/master/Clase
 
 
 
-intervalo_inicio = str(input('Definir inicio (formato yyyy-mm-dd): '))
-intervalo_fin = str(input('Definir fin (formato yyyy-mm-dd): '))
+
 
 
 
@@ -67,36 +66,27 @@ plt.plot(dates_clean, med_valueAMZN, 'y-', label='amazon')
 
 
 
-promedioG = (TablaGGL['Open'] + TablaGGL['Close'])//2
-promedioA = (TablaAMZN['Open'] + TablaAMZN['Close'])//2
-dateint = [n for n in range(len(TablaAMZN['Date']))]
-dates = TablaAMZN['Date']
 
-line_1 = LineString(np.column_stack((dateint, promedioG)))
-line_2 = LineString(np.column_stack((dateint, promedioA)))
-interseccion = line_1.intersection(line_2)
-try:
-    xinter = [point.x for point in interseccion]
-    yinter = [point.y for point in interseccion]
-except TypeError:
-    print('No hay intersecciones.')
-    xinter, yinter = [], []
 
+#intersect_data = {
+#    'Fecha' : xinter,
+#    'Precio' : yinter
+
+#}
+
+#intersect_dataFrame = pd.DataFrame(intersect_data)
+
+#intersect_dataFrame.to_excel('Intersecciones de la Bolsa')
+
+#==================================================================================
 
 
 
-#===============================================================================
+#plt.stem(x, y2, label = 'dx')
 
 
 
-fechas_analisis = dates[intervalo_inicio::intervalo_fin]
 
-if yinter in fechas_analisis:
-    plt.plot(xinter, yinter, 'bo', label='Interseccion')
-    
-else:
-    print('No existe intersección entre los gráficos en el intervalo de fechas seleccionadas')
-    
 
 r = []
 
@@ -104,9 +94,7 @@ plt.ylabel('Dólares')
 plt.xlabel('Fecha')
 plt.xticks(r)
 plt.legend(loc='upper left')
-plt.savefig('Acciones GGL Vs AMZN.png')
+#plt.savefig('Acciones GGL Vs AMZN.png')
 plt.show()
-
-
 
 
