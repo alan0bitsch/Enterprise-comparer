@@ -15,6 +15,26 @@ dates = TablaAMZN['Date']
 
 
 
+fecha_inicio = str(input('Fecha inicio análisis aaaa-mm-dd: '))
+fecha_fin = str(input('Fecha fin análisis aaaa-mm-dd: '))
+periodo_tiempo = str(input('Periodo en meses[m] o años[a]: '))
+
+dates_listed = dates.to_list()
+try:
+    dates_index_ini = dates_listed.index(fecha_inicio)
+    dates_index_fn = dates_listed.index(fecha_fin)
+except:
+    print('\nLa fecha elegida no figura en los datos.\nRecuerde que la bolsa de valores no abre los fines de semana\n')
+    dates_index_ini = ()
+    dates_index_fn = ()
+
+#2015-01-02
+#2020-01-02
+
+fechas_de_analisis = dates_listed[dates_index_ini:(dates_index_fn + 1)]
+print(fechas_de_analisis)
+
+#Aca no se como usar la lista de fechas sliceadas :( too bad!
 
 line_1 = LineString(np.column_stack((dateint, promedioG)))
 line_2 = LineString(np.column_stack((dateint, promedioA)))
@@ -62,31 +82,47 @@ def doubled(promedio):
     return diff
     
 
-doubled(promedioA)
+
 
 
 
 intersect_dataFrame = pd.DataFrame(intersect_data)
 
-intersect_dataFrame.to_excel('Intersecciones de la Bolsa.xlsx', index=False)
+#intersect_dataFrame.to_excel('Intersecciones de la Bolsa.xlsx', index=False)
+
+#Esto para marcar el eje x por año
+
+def monthcuts(dates):
+    monthcuts = []
+    flist = []
+    cmonth = None
+    for date in dates:
+        
+        if date[0:4] != cmonth:
+            monthcuts.append(date)
+            cmonth = date[0:4]
+    for date in dates:
+        if date in monthcuts:
+            flist.append(date)
+        else:
+            flist.append('')
+    return flist
+
+
+lista_de_algo = monthcuts(dates)
 
 
 
-
-
-
-
-plt.figure(figsize=[20, 20])
+plt.figure(figsize=[50, 20])
 plt.subplot(2, 2, 1)
-plt.plot(dates, promedioG,'r-', label='Google')
-plt.plot(dates, promedioA,'b-', label='Amazon')
+plt.plot(fechas_de_analisis, promedioG[dates_index_ini:(dates_index_fn + 1)],'r-', label='Google')
+plt.plot(fechas_de_analisis, promedioA[dates_index_ini:(dates_index_fn + 1)],'b-', label='Amazon')
 plt.plot(xinter, yinter, 'g.', label='Interseccion')
 plt.plot(lineinter, 'yx', label='Intersexxion')
 plt.title(f'Acciones Empresa1 Vs Empresa2')
 plt.ylabel('Valor en $')
 plt.xlabel('Fecha')
-r = []
-plt.xticks(r)
+plt.xticks(lista_de_algo, rotation=70)
 plt.legend()
 
 plt.subplot(2, 2, 2)
@@ -95,7 +131,7 @@ plt.ylabel('Crecimiento Relativo')
 plt.xlabel('Fecha')
 plt.stem(dates, doubled(promedioA), linefmt='r-', markerfmt='c.')
 plt.plot()
-plt.xticks(r)
+plt.xticks(lista_de_algo, rotation=70)
 
 plt.subplot(2, 2, 3)
 plt.title(f'Crecimiento Empresa2')
@@ -103,7 +139,7 @@ plt.ylabel('Crecimiento Relativo')
 plt.xlabel('Fecha')
 plt.stem(dates, doubled(promedioG), linefmt='c-', markerfmt='m.')
 plt.plot()
-plt.xticks(r)
+plt.xticks(lista_de_algo, rotation=70)
 
-plt.savefig('pruebatest')
-plt.show()
+#plt.savefig('pruebatest')
+#plt.show()
